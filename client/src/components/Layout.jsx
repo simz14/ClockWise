@@ -1,12 +1,17 @@
+import { styled } from "styled-components";
 import SideBar from "./SideBar/SideBar";
 import { PropTypes } from "prop-types";
 
+const LayoutWrapper = styled.div`
+  display: flex;
+`;
+
 const Layout = ({ children }) => {
   return (
-    <div>
+    <LayoutWrapper>
       <SideBar />
       {children}
-    </div>
+    </LayoutWrapper>
   );
 };
 
