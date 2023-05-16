@@ -1,5 +1,7 @@
+import Layout from "../../components/Layout";
+
 const Tracker = () => {
-  return <div>Tracker</div>;
+  return <Layout>Tracker</Layout>;
 };
 
 export default Tracker;
