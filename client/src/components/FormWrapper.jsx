@@ -7,6 +7,9 @@ const StyledForm = styled.div`
   min-height: 20rem;
   padding: 2rem;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const FormWrapper = ({ children }) => {
