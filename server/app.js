@@ -1,0 +1,21 @@
+const express = require("express");
+
+const db = require("./models");
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+db.sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Connection has been established successfully.");
+  })
+  .catch((error) => {
+    console.error("Unable to connect to the database: ", error);
+  });
+
+app.use(express.json());
+app.use(cors());
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
