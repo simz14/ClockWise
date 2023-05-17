@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import LoginForm from "./components/LoginForm";
 
 const LoginWrapper = styled.div`
   position: relative;
@@ -10,7 +11,11 @@ const LoginWrapper = styled.div`
 `;
 
 const Login = () => {
-  return <LoginWrapper>Login</LoginWrapper>;
+  return (
+    <LoginWrapper>
+      <LoginForm />
+    </LoginWrapper>
+  );
 };
 
 export default Login;
