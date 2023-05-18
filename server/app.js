@@ -5,6 +5,11 @@ const router = require("./routes/routes");
 const { sequelize } = require("./database/connection");
 const PORT = process.env.PORT || 5000;
 
+const corsOptions = {
+  origin: "http://127.0.0.1:5173",
+};
+app.use(cors(corsOptions));
+
 sequelize
   .authenticate()
   .then(() => {
@@ -16,7 +21,6 @@ sequelize
 
 app.use(express.json());
 app.use(router);
-app.use(cors());
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

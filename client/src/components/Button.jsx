@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import { PropTypes } from "prop-types";
 import { styled } from "styled-components";
 
@@ -29,10 +30,10 @@ const StyledButton = styled.div`
   }
 `;
 
-const Button = ({ title, onClick, pinkButton }) => {
+const Button = ({ title, onClick, pinkButton, loading }) => {
   return (
     <StyledButton className={pinkButton ? "pink" : "yellow"} onClick={onClick}>
-      {title}
+      {loading ? <CircularProgress color="secondary" /> : title}
     </StyledButton>
   );
 };
@@ -41,6 +42,7 @@ Button.propTypes = {
   title: PropTypes.string,
   onClick: PropTypes.func,
   pinkButton: PropTypes.bool,
+  loading: PropTypes.bool,
 };
 
 export default Button;

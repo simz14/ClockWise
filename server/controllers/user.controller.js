@@ -6,7 +6,7 @@ const userController = {
       await addUserService(req.body);
       res.status(201).json({ message: "Successful." });
     } catch (err) {
-      res.status(422).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
   },
 };
