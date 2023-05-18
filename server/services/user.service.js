@@ -1,4 +1,6 @@
+const { createJwt } = require("../middlewares/createJwtToken");
 const { User } = require("../models/user");
+const bcrypt = require("bcrypt");
 
 const addUserService = async (data) => {
   const { username, email, password } = data;
@@ -38,4 +40,30 @@ const addUserService = async (data) => {
   }
 };
 
-module.exports = { addUserService };
+const checkUserService = async (data) => {
+  const { email, password } = data;
+  const user = await User.findOne({
+    where: { email: email },
+  });
+
+  if (email) {
+    if (password) {
+      if (user) {
+        const valid = bcrypt.compare(password, user.password);
+        if (!(await valid)) {
+          throw new Error("Incorrect password!");
+        }
+        const usersJwt = createJwt(user.id, user.username, user.email);
+        return usersJwt;
+      } else {
+        throw new Error("Incorrect email adress!");
+      }
+    } else {
+      throw new Error("Password is missing!");
+    }
+  } else {
+    throw new Error("Email is missing!");
+  }
+};
+
+module.exports = { addUserService, checkUserService };
