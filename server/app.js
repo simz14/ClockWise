@@ -1,12 +1,11 @@
 const express = require("express");
-
-const db = require("./models");
 const app = express();
 const cors = require("cors");
 const router = require("./routes/routes");
+const { sequelize } = require("./database/connection");
 const PORT = process.env.PORT || 5000;
 
-db.sequelize
+sequelize
   .authenticate()
   .then(() => {
     console.log("Connection has been established successfully.");

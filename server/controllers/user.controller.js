@@ -4,7 +4,7 @@ const userController = {
   async addUser(req, res) {
     try {
       await addUserService(req.body);
-      res.status(201).json({ message: "Successful registration." });
+      res.status(201).json({ message: "Successful." });
     } catch (err) {
       res.status(422).json({ message: err.message });
     }
