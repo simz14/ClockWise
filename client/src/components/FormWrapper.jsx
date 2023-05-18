@@ -10,6 +10,19 @@ const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  @media (max-width: 400px) {
+    width: 90%;
+    min-width: 10rem;
+  }
+  .linkTo {
+    color: ${({ theme }) => theme.colors.fadePurple};
+    font-weight: 600;
+    align-self: center;
+    a {
+      text-decoration: none;
+      color: ${({ theme }) => theme.colors.mediumPruple};
+    }
+  }
 `;
 
 const FormWrapper = ({ children }) => {

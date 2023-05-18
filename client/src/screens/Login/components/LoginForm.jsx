@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
 import FormWrapper from "../../../components/FormWrapper";
 import { TextField } from "@mui/material";
@@ -35,6 +36,9 @@ const LoginForm = () => {
         helperText={errors.password?.message}
       />
       <Button onClick={handleSubmit()} title="Login" pinkButton={true} />
+      <p className="linkTo">
+        Don&#39;t have an account? <Link to="/register"> Sign In</Link>
+      </p>
     </FormWrapper>
   );
 };

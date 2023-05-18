@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
 import FormWrapper from "../../../components/FormWrapper";
 import { TextField } from "@mui/material";
@@ -45,6 +46,9 @@ const RegisterForm = () => {
       />
 
       <Button onClick={handleSubmit()} title="Register" pinkButton={true} />
+      <p className="linkTo">
+        Already have an account? <Link to="/login"> Sign In</Link>
+      </p>
     </FormWrapper>
   );
 };
