@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import FormWrapper from "../../../components/FormWrapper";
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, Switch, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { checkUser } from "../../../services/user.service";
 import { useState } from "react";
@@ -21,13 +21,14 @@ const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
 
   //simulating fetching
   const handleClickLogin = async () => {
     setLoading(true);
     try {
-      const response = await checkUser(getValues());
+      const response = await checkUser({ ...getValues(), exp: checked });
       const responseData = await response.json();
       setTimeout(() => {
         setLoading(false);
@@ -47,6 +48,10 @@ const LoginForm = () => {
 
   const handleClickShow = () => {
     setVisible((prev) => !prev);
+  };
+
+  const handleClickChecked = () => {
+    setChecked((prev) => !prev);
   };
 
   return (
@@ -89,7 +94,7 @@ const LoginForm = () => {
           ),
           endAdornment: (
             <InputAdornment
-              className="passworIcon"
+              className="passwordIcon"
               onClick={handleClickShow}
               position="end"
             >
@@ -97,6 +102,11 @@ const LoginForm = () => {
             </InputAdornment>
           ),
         }}
+      />
+      <Switch
+        onChange={handleClickChecked}
+        checked={checked}
+        color="secondary"
       />
       <Button
         onClick={handleSubmit(handleClickLogin)}
