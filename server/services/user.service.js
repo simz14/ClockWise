@@ -41,7 +41,7 @@ const addUserService = async (data) => {
 };
 
 const checkUserService = async (data) => {
-  const { email, password } = data;
+  const { email, password, exp } = data;
   const user = await User.findOne({
     where: { email: email },
   });
@@ -53,7 +53,7 @@ const checkUserService = async (data) => {
         if (!(await valid)) {
           throw new Error("Incorrect password!");
         }
-        const usersJwt = createJwt(user.id, user.username, user.email);
+        const usersJwt = createJwt(user.id, user.username, user.email, exp);
         return usersJwt;
       } else {
         throw new Error("Incorrect email adress!");
