@@ -15,6 +15,9 @@ const LoginWrapper = styled.div`
     font-weight: 600;
     margin: 16px 0 0 0;
   }
+  .passwordIcon {
+    cursor: pointer;
+  }
 `;
 
 const Login = () => {

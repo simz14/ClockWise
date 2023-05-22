@@ -2,9 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import FormWrapper from "../../../components/FormWrapper";
-import { TextField } from "@mui/material";
+import { InputAdornment, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { addUser } from "../../../services/user.service";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const RegisterForm = () => {
   const {
@@ -15,6 +20,7 @@ const RegisterForm = () => {
   } = useForm();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
 
   //simulating fetching
@@ -35,6 +41,10 @@ const RegisterForm = () => {
     }
   };
 
+  const handleClickShow = () => {
+    setVisible((prev) => !prev);
+  };
+
   return (
     <FormWrapper>
       <h3>Sign Up</h3>
@@ -46,6 +56,13 @@ const RegisterForm = () => {
         variant="outlined"
         error={errors.username ? true : false}
         helperText={errors.username?.message}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <AccountCircleIcon />
+            </InputAdornment>
+          ),
+        }}
       />
       <TextField
         {...register("email", {
@@ -59,6 +76,13 @@ const RegisterForm = () => {
         variant="outlined"
         error={errors.email ? true : false}
         helperText={errors.email?.message}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <EmailIcon />
+            </InputAdornment>
+          ),
+        }}
       />
       <TextField
         {...register("password", {
@@ -67,7 +91,24 @@ const RegisterForm = () => {
         label="Password"
         variant="outlined"
         error={errors.password ? true : false}
+        type={visible ? "text" : "password"}
         helperText={errors.password?.message}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <LockIcon />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment
+              className="passwordIcon"
+              onClick={handleClickShow}
+              position="end"
+            >
+              {visible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </InputAdornment>
+          ),
+        }}
       />
 
       <Button
