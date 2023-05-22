@@ -23,6 +23,9 @@ const StyledForm = styled.div`
       color: ${({ theme }) => theme.colors.mediumPruple};
     }
   }
+  .MuiTypography-root {
+    color: ${({ theme }) => theme.colors.fadePurple};
+  }
 `;
 
 const FormWrapper = ({ children }) => {

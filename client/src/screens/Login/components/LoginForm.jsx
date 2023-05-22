@@ -1,7 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import FormWrapper from "../../../components/FormWrapper";
-import { InputAdornment, Switch, TextField } from "@mui/material";
+import {
+  FormControlLabel,
+  InputAdornment,
+  Switch,
+  TextField,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
 import { checkUser } from "../../../services/user.service";
 import { useState } from "react";
@@ -103,11 +108,17 @@ const LoginForm = () => {
           ),
         }}
       />
-      <Switch
-        onChange={handleClickChecked}
-        checked={checked}
-        color="secondary"
+      <FormControlLabel
+        control={
+          <Switch
+            onChange={handleClickChecked}
+            checked={checked}
+            color="secondary"
+          />
+        }
+        label="Remember me"
       />
+
       <Button
         onClick={handleSubmit(handleClickLogin)}
         title="Login"
