@@ -15,19 +15,31 @@ const LoginForm = () => {
   } = useForm();
 
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  //simulating fetching
   const handleClickLogin = async () => {
+    setLoading(true);
     try {
       const response = await checkUser(getValues());
       const responseData = await response.json();
-      window.localStorage.setItem("token", responseData.jwt);
-      setErrorMsg("");
+      setTimeout(() => {
+        setLoading(false);
+        window.localStorage.setItem("token", responseData.jwt);
+        setErrorMsg("");
+        navigate("/");
+      }, [1500]);
+
       navigate("/");
     } catch (err) {
-      setErrorMsg(err.message);
+      setTimeout(() => {
+        setErrorMsg(err.message);
+        setLoading(false);
+      }, [1500]);
     }
   };
+
   return (
     <FormWrapper>
       <h3>Sign In</h3>
@@ -57,10 +69,11 @@ const LoginForm = () => {
         onClick={handleSubmit(handleClickLogin)}
         title="Login"
         pinkButton={true}
+        loading={loading}
       />
-      {errorMsg && <p>{errorMsg}</p>}
+      {errorMsg && <p className="error">{errorMsg}</p>}
       <p className="linkTo">
-        Don&#39;t have an account? <Link to="/register"> Sign In</Link>
+        Don&#39;t have an account? <Link to="/register"> Sign Up</Link>
       </p>
     </FormWrapper>
   );

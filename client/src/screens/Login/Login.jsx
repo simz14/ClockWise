@@ -8,6 +8,13 @@ const LoginWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  .error {
+    display: flex;
+    align-self: center;
+    color: ${({ theme }) => theme.colors.brightPurple};
+    font-weight: 600;
+    margin: 16px 0 0 0;
+  }
 `;
 
 const Login = () => {

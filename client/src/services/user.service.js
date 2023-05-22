@@ -28,7 +28,6 @@ export const checkUser = async (data) => {
     return response;
   } else {
     const errorData = await response.json();
-    console.log(errorData);
     throw new Error(errorData.message);
   }
 };
