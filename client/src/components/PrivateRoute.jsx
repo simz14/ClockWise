@@ -9,7 +9,6 @@ const PrivateRoute = ({ children }) => {
   const [isAuth, setIsAuth] = useState(true);
 
   useEffect(() => {
-    console.log(isAuth);
     const authResponse = async () => {
       try {
         await auth(token ? token : "");
@@ -22,7 +21,6 @@ const PrivateRoute = ({ children }) => {
   }, [isAuth, token]);
 
   if (isAuth) {
-    console.log(isAuth);
     return <>{children}</>;
   } else {
     navigate("/login");
