@@ -14,6 +14,8 @@ import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useDispatch, useSelector } from "react-redux";
+import { setTo } from "../../../redux/user";
 
 const LoginForm = () => {
   const {
@@ -28,6 +30,9 @@ const LoginForm = () => {
   const [visible, setVisible] = useState(false);
   const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
 
   //simulating fetching
   const handleClickLogin = async () => {
@@ -58,6 +63,8 @@ const LoginForm = () => {
   const handleClickChecked = () => {
     setChecked((prev) => !prev);
   };
+
+  console.log(user);
 
   return (
     <FormWrapper>
@@ -119,6 +126,12 @@ const LoginForm = () => {
         label="Remember me"
       />
 
+      <Button
+        onClick={() => dispatch(setTo({ id: 1, name: "Erix" }))}
+        title="Login"
+        pinkButton={true}
+        loading={loading}
+      />
       <Button
         onClick={handleSubmit(handleClickLogin)}
         title="Login"
