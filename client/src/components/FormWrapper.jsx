@@ -20,7 +20,7 @@ const StyledForm = styled.div`
     align-self: center;
     a {
       text-decoration: none;
-      color: ${({ theme }) => theme.colors.mediumPruple};
+      color: ${({ theme }) => theme.colors.mediumPurple};
     }
   }
   .MuiTypography-root {

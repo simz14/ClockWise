@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const StyledBar = styled.div`
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.mediumPruple};
+  background-color: ${({ theme }) => theme.colors.mediumPurple};
 
   .listLabel {
     color: ${({ theme }) => theme.colors.lightText};
