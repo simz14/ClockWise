@@ -5,8 +5,7 @@ export const auth = async (token) => {
   });
 
   if (response.status === 200) {
-    console.log(response);
-    return response;
+    return await response.json();
   } else {
     const errorData = await response.json();
     throw new Error(errorData.message);

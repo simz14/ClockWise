@@ -15,7 +15,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useDispatch, useSelector } from "react-redux";
-import { setTo } from "../../../redux/user";
+import { setUser } from "../../../redux/user";
 
 const LoginForm = () => {
   const {
@@ -31,7 +31,7 @@ const LoginForm = () => {
   const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
 
-  const user = useSelector((state) => state.user.value);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   //simulating fetching
@@ -127,7 +127,7 @@ const LoginForm = () => {
       />
 
       <Button
-        onClick={() => dispatch(setTo({ id: 1, name: "Erix" }))}
+        onClick={() => dispatch(setUser({ id: 1, name: "Erix" }))}
         title="Login"
         pinkButton={true}
         loading={loading}
