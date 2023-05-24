@@ -2,14 +2,13 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const authorization = (authHeader) => {
-  if (!authHeader) {
+  const token = authHeader.split(" ")[1];
+  const key = process.env.SECRET_KEY;
+  let decoded = {};
+  if (!token) {
     throw new Error("Authorization error: no token");
   }
 
-  let token = authHeader.split(" ")[1];
-  let key = process.env.SECRET_KEY;
-  let decoded = {};
-  console.log(jwt.verify(token, key));
   try {
     decoded = jwt.verify(token, key);
   } catch (err) {
