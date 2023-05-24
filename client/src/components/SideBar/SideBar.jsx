@@ -1,17 +1,13 @@
 import styled from "styled-components";
 import { List } from "@mui/material";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import PollIcon from "@mui/icons-material/Poll";
 import ListItemComponent from "../ListItemComponent";
 import { useSelector } from "react-redux";
 
 const StyledBar = styled.div`
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.mediumPruple};
-
-  .MuiList-root {
-    gap: 24px;
-    margin: 24px 0;
-  }
 
   .listLabel {
     color: ${({ theme }) => theme.colors.lightText};
@@ -22,7 +18,7 @@ const StyledBar = styled.div`
   }
   .userInfo {
     padding-left: 16px;
-    margin-top: 24px;
+    margin: 24px 0;
 
     h3 {
       font-size: 15px;
@@ -39,7 +35,6 @@ const StyledBar = styled.div`
 
 const SideBar = () => {
   const user = useSelector((state) => state.user);
-  console.log(user);
   return (
     <StyledBar>
       <div className="userInfo">
@@ -49,6 +44,11 @@ const SideBar = () => {
       <List>
         <p className="listLabel">TRACK</p>
         <ListItemComponent text="Timer" icon={<AccessTimeFilledIcon />} />
+      </List>
+
+      <List>
+        <p className="listLabel">ANALYZE</p>
+        <ListItemComponent text="Reports" icon={<PollIcon />} />
       </List>
     </StyledBar>
   );
