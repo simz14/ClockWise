@@ -1,10 +1,21 @@
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
+import CircleIcon from "@mui/icons-material/Circle";
 import FolderIcon from "@mui/icons-material/Folder";
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import moment from "moment";
 import { useForm } from "react-hook-form";
-import { TextField } from "@mui/material";
+import {
+  CircularProgress,
+  ClickAwayListener,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Popover,
+  TextField,
+} from "@mui/material";
+import { getProjects } from "../../../services/project.service";
 
 const StyledPanel = styled.div`
   width: 100%;
@@ -36,7 +47,10 @@ const PlayPanel = () => {
   const [startTime, setStartTime] = useState(null);
   const [trackTime, setTrackTime] = useState("0:00:00");
   const [isTracking, setIsTracking] = useState(false);
+  const [projects, setProjects] = useState([]);
   const { register } = useForm();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
   useEffect(() => {
     let interval = null;
@@ -62,6 +76,16 @@ const PlayPanel = () => {
     setIsTracking(false);
   };
 
+  const handleClickFolder = (e) => {
+    setAnchorEl(e.target);
+    const fetchData = async () => {
+      const data = await getProjects();
+      setProjects(data);
+    };
+    fetchData();
+  };
+
+  console.log(projects);
   return (
     <StyledPanel>
       <div>
@@ -71,13 +95,53 @@ const PlayPanel = () => {
         />
       </div>
       <div className="controlPanel">
-        <FolderIcon />
+        <FolderIcon onClick={(e) => handleClickFolder(e)} />
         <h3 className="time">{trackTime}</h3>
         <PlayCircleFilledIcon
           className="playButton"
           onClick={() => (isTracking ? handleStop() : handleStart())}
         />
       </div>
+      <Popover
+        open={open}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
+          <List>
+            {projects ? (
+              projects.map((project) => {
+                return (
+                  <ListItemButton
+                    style={{ color: project.color }}
+                    key={project.id}
+                  >
+                    <ListItemIcon
+                      style={{ minWidth: "15px", color: project.color }}
+                    >
+                      <CircleIcon style={{ width: "10px", height: "10px" }} />
+                    </ListItemIcon>
+                    <ListItemText primary={project.name} />
+                  </ListItemButton>
+                );
+              })
+            ) : (
+              <CircularProgress />
+            )}
+            <div className="createProject">
+              <p>Create a new project</p>
+            </div>
+          </List>
+        </ClickAwayListener>
+      </Popover>
     </StyledPanel>
   );
 };

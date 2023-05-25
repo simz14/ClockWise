@@ -52,7 +52,6 @@ const Panel = () => {
           <p>Profile</p>
 
           <Popover
-            id={1}
             open={open}
             anchorEl={anchorEl}
             onClose={handleClose}
