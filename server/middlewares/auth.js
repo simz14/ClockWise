@@ -1,6 +1,10 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+//check if there is a token,
+//if its valid
+//and return the decoded version with
+
 const authorization = (authHeader) => {
   const token = authHeader.split(" ")[1];
   const key = process.env.SECRET_KEY;
