@@ -11,4 +11,6 @@ router.post("/auth", authorizationController.authorizate);
 router.post("/track", trackController.addTrack);
 router.post("/project", projectController.addProject);
 
+router.get("/projects", projectController.getProjetcs);
+
 module.exports = router;

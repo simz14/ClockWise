@@ -12,5 +12,12 @@ const addProject = async (data) => {
     throw new Error(err.message);
   }
 };
+const getProjects = async () => {
+  try {
+    return await Project.findAll();
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
-module.exports = { addProject };
+module.exports = { addProject, getProjects };
